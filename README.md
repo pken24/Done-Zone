@@ -1,18 +1,17 @@
-**Financial Data Analysis and Visualization Tool**
+**Drop-Zone**
 
-Welcome to our tool for financial markets! The project aims to develop a comprehensive data analysis and visualization tool for financial markets using Python, GitHub, and Scrum methodology. It will focus on collecting, analyzing, and visualizing financial data to provide insights into market trends, stock performance, and investment opportunities.
+The application is a task management tool designed to help customers organize and track their daily tasks and projects efficiently. Users can create a list of tasks or to-dos, and each task can be assigned a status: "completed," "in-progress," or "blocked." This categorization helps users visualize their progress and manage their time effectively.
 
 **Key Features:**
 
-1. **Data Collection:** Our tool fetches real-time financial data from various sources such as Yahoo Finance, Alpha Vantage, and other APIs to ensure accuracy and reliability.
+1. **Task Creation:** Users can easily add new tasks or to-dos to their list with descriptions and due dates.
+   
+2. **Visualization:** Utilize libraries such as Matplotlib to visualize completed tasks similar to this:
+https://www.simplilearn.com/ice9/free_resources_article_thumb/bar-graph.JPG
 
-2. **Data Processing:** We've implemented algorithms to clean, preprocess, and analyze the collected financial data. This includes handling missing values, normalizing data, and calculating statistical measures to provide meaningful insights.
+5. **User Interface:** Our user-friendly interface allows users to input their tasks and afterward it will take them to their individual backlog.
 
-3. **Visualization:** With the help of libraries like Matplotlib, Plotly, and Seaborn, our tool creates interactive and informative visualizations. Users can explore the analyzed data through graphs, charts, and dashboards.
-
-4. **User Interface:** Our user-friendly interface allows users to input parameters, view results, and customize visualizations effortlessly. We've designed the interface with frameworks to enhance usability and accessibility.
-
-5. **GitHub Integration:** We utilize GitHub for version control, collaboration, and project management. Each sprint's work is organized into GitHub issues, and the project's codebase is hosted on GitHub for transparency and ease of contribution.
+6. **GitHub Integration:** We utilize GitHub for version control, collaboration, and project management. Each sprint's work is organized into GitHub issues, and the project's codebase is hosted on GitHub for transparency and ease of contribution.
 
 **How to Use:**
 
