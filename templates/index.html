@@ -29,5 +29,11 @@
         </li>
         {% endfor %}
     </ul>
+    <div id="graph"></div>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+    var graph = {{ graphJSON | safe }};
+    Plotly.newPlot('graph', graph);
+    </script>
 </body>
 </html>
