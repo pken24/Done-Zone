@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import heapq
+import matplotlib.pyplot as plt
 
 app = Flask(__name__)
 
@@ -55,7 +56,27 @@ class TodoList:
 
     def next_task(self):
         return self.pq.dequeue()
+    
+    def count_priorities(self):
+        priority_counts = {}
+        for task in self.pq.elements:
+            if task.priority in priority_counts:
+                priority_counts[task.priority] += 1
+            else:
+                priority_counts[task.priority] = 1
+        return priority_counts
 
+    def plot_priority_counts(self):
+        priority_counts = self.count_priorities()
+        priorities = list(priority_counts.keys())
+        counts = list(priority_counts.values())
+
+        plt.bar(priorities, counts)
+        plt.xlabel('Priority')
+        plt.ylabel('Number of Tasks')
+        plt.title('Number of Tasks per Priority Level')
+        plt.show()
+        
     def peek_next_task(self):
         return self.pq.peek()
 
