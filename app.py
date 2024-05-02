@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import heapq
-import matplotlib.pyplot as plt
+import plotly.graph_objects as go
 
 app = Flask(__name__)
 
@@ -57,26 +57,6 @@ class TodoList:
     def next_task(self):
         return self.pq.dequeue()
     
-    def count_priorities(self):
-        priority_counts = {}
-        for task in self.pq.elements:
-            if task.priority in priority_counts:
-                priority_counts[task.priority] += 1
-            else:
-                priority_counts[task.priority] = 1
-        return priority_counts
-
-    def plot_priority_counts(self):
-        priority_counts = self.count_priorities()
-        priorities = list(priority_counts.keys())
-        counts = list(priority_counts.values())
-
-        plt.bar(priorities, counts)
-        plt.xlabel('Priority')
-        plt.ylabel('Number of Tasks')
-        plt.title('Number of Tasks per Priority Level')
-        plt.show()
-        
     def peek_next_task(self):
         return self.pq.peek()
 
@@ -91,7 +71,16 @@ class TodoList:
             tasks.append((task.name, task.priority))
         self.pq.elements = pq_copy
         return tasks
+    def plot_priority_counts(self):
+        priority_counts = self.count_priorities()
+        priorities = list(priority_counts.keys())
+        counts = list(priority_counts.values())
 
+        fig = go.Figure([go.Bar(x=priorities, y=counts, text=counts, textposition='auto')])
+        fig.update_layout(title_text='Number of Tasks per Priority Level')
+        graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+
+        return graphJSON
 todo_list = TodoList()
 
 @app.route('/', methods=['GET', 'POST'])
@@ -102,7 +91,8 @@ def index():
         todo_list.new_task(task_name, priority)
         return redirect(url_for('index'))
     tasks = todo_list.get_tasks()
-    return render_template('index.html', tasks=tasks)
+    graphJSON = todo_list.plot_priority_counts()
+    return render_template('index.html', tasks=tasks, graphJSON=graphJSON)
 
 if __name__ == '__main__':
     app.run(debug=True)
