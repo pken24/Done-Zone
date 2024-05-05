@@ -8,9 +8,12 @@ This Done-Zone Todo List application allows users to add tasks with different pr
 * Flask library installed (pip install Flask)
 
 **Installation**
-
-1. Clone the repository or download the source code.
-2. Navigate to the project directory in your terminal.
+1. Install required packages
+```
+pip install -r requirements.txt
+```
+2. Clone the repository or download the source code.
+3. Navigate to the project directory in your terminal.
 
 **Usage**
 
