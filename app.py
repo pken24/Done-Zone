@@ -1,36 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
-import heapq
+import json
 
 app = Flask(__name__)
-
-class PriorityQueue:
-    def __init__(self, compare_fn):
-        self.elements = []
-        self.compare_fn = compare_fn
-
-    def enqueue(self, element, priority):
-        heapq.heappush(self.elements, (priority, element))
-
-    def dequeue(self):
-        return heapq.heappop(self.elements)[1]
-
-    def is_empty(self):
-        return len(self.elements) == 0
-
-    def peek(self):
-        if not self.is_empty():
-            return self.elements[0][1]
-        return None
-
-HIGH_PRIORITY = 3
-MEDIUM_PRIORITY = 2
-LOW_PRIORITY = 1
-
-def compare_tasks(task1, task2):
-    if task1.priority == task2.priority:
-        return task1.creation_time - task2.creation_time
-    else:
-        return task2.priority - task1.priority
 
 class Task:
     def __init__(self, name, priority, creation_time):
@@ -38,38 +9,23 @@ class Task:
         self.priority = priority
         self.creation_time = creation_time
 
-    def __lt__(self, other):
-        if self.priority == other.priority:
-            return self.creation_time < other.creation_time
-        else:
-            return self.priority < other.priority
-
 class TodoList:
     def __init__(self):
-        self.pq = PriorityQueue(compare_tasks)
+        self.tasks = []
 
     def new_task(self, task_name, priority):
-        creation_time = len(self.pq.elements)
+        creation_time = len(self.tasks)
         task = Task(task_name, priority, creation_time)
-        self.pq.enqueue(task, priority)
-
-    def next_task(self):
-        return self.pq.dequeue()
-
-    def peek_next_task(self):
-        return self.pq.peek()
-
-    def is_empty(self):
-        return self.pq.is_empty()
+        self.tasks.append(task)
 
     def get_tasks(self):
-        tasks = []
-        pq_copy = self.pq.elements.copy()
-        while not self.pq.is_empty():
-            task = self.pq.dequeue()
-            tasks.append((task.name, task.priority))
-        self.pq.elements = pq_copy
-        return tasks
+        return [(task.name, task.priority) for task in self.tasks]
+
+    def count_priorities(self):
+        counts = {3: 0, 2: 0, 1: 0}  # Priority levels: High, Medium, Low
+        for task in self.tasks:
+            counts[task.priority] += 1
+        return counts
 
 todo_list = TodoList()
 
@@ -81,7 +37,8 @@ def index():
         todo_list.new_task(task_name, priority)
         return redirect(url_for('index'))
     tasks = todo_list.get_tasks()
-    return render_template('index.html', tasks=tasks)
+    priority_counts = todo_list.count_priorities()
+    return render_template('index.html', tasks=tasks, priority_counts=priority_counts)
 
 if __name__ == '__main__':
     app.run(debug=True)
