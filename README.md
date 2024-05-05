@@ -65,3 +65,25 @@ We welcome contributions from the community to enhance our tool further. Here's 
 5.  Code Review: Our team will review your pull request, provide feedback, and merge it into the main codebase if everything looks good.
 
 Thank you for your interest in our Done-Zone ToDo Lists applications. We look forward to your contributions and hope our tool proves to be valuable in your financial analysis endeavors.
+
+**References**
+
+Flask Documentation: https://flask.palletsprojects.com/
+
+Plotly.js Documentation: https://plotly.com/javascript/
+
+The implementation of the Todo List application was inspired by the following sources:
+
+Flask Todo List Tutorial: The Flask code structure and web routing logic were adapted from Flask documentation.
+Priority Queue Implementation: The PriorityQueue class implementation was inspired by the Python heapq module documentation and custom comparison functions.
+
+Flask Installation Guide: The installation procedure for Flask was followed from the tutorial by Corey Schafer on YouTube: [Flask Tutorial: Web Development with Python - Full Course](https://youtu.be/GHvj1ivQ7ms).
+
+
+The code structure and logic for the Flask Todo List application were adapted from the Flask Todo App tutorial by Python Engineer:
+
+* Tutorial Title:[ Flask Todo App](https://www.python-engineer.com/posts/flask-todo-app/)
+
+* Author: Python Engineer
+
+* Website: [python-engineer.com](https://www.python-engineer.com/)
